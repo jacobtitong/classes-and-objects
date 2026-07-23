@@ -36,8 +36,7 @@ public class Main {
         String title = sc.nextLine();
         System.out.print("Enter author: ");
         String author = sc.nextLine();
-        System.out.print("Enter year: ");
-        int year = sc.nextInt();
+        int year = getValidYear("Enter year: ");
 
         // Add the book
         library[numberOfBooks] = new Book(title, author, year);
@@ -67,6 +66,20 @@ public class Main {
             }
         }
         return number;
+    }
+
+    public static int getValidYear(String prompt) {
+        boolean isValid = false;
+        int year = -1;
+        while (!isValid) {
+            year = getValidInt(prompt);
+            if (year >= 1000 && year <= 2026) {
+                isValid = true;
+            } else {
+                System.out.println("Error: Please enter a realistic publication year (4 digits, between 1000 - 2026) ");
+            }
+        }
+        return year;
     }
 
     public static void displayBooks() {
