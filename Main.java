@@ -19,6 +19,9 @@ public class Main {
                 case 1:
                     addBook();
                     break;
+                case 2:
+                    displayBooks();
+                    break;
                 case 4:
                     endProgram = true;
                     break;
@@ -64,5 +67,22 @@ public class Main {
             }
         }
         return number;
+    }
+
+    public static void displayBooks() {
+        System.out.print("\n=== BOOK LIST ===");
+        System.out.println("\n+----------------------+-----------------+--------+");
+        System.out.printf("| %-20.20s | %-15.15s | %-6s |\n", "Title", "Author", "Year");
+        System.out.println("+----------------------+-----------------+--------+");
+
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (library[i] != null) {
+                System.out.printf("| %-20.20s | %-15.15s | %-6d |\n", 
+                library[i].title, 
+                library[i].author, 
+                library[i].year);
+            }
+        }
+        System.out.println("+----------------------+-----------------+--------+");
     }
 }
