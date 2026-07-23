@@ -12,7 +12,7 @@ public class Main {
 
         while (!endProgram) {
             System.out.print("\n=== LIBRARY MANAGEMENT SYSTEM MENU ===");
-            System.out.print("\n1 - Add a book\n4 - Exit\n");
+            System.out.print("\n1 - Add a book\n2 - Display books\n4 - Exit\n");
             int option = getValidInt("--> Option: ");
 
             switch (option) {
