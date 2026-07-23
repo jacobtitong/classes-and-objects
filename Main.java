@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class Main {
     static Book[] library = new Book[1];
@@ -11,9 +12,8 @@ public class Main {
 
         while (!endProgram) {
             System.out.print("\n=== LIBRARY MANAGEMENT SYSTEM MENU ===");
-            System.out.print("\n1 - Add a book\n4 - Exit\n--> Option: ");
-            int option = sc.nextInt();
-            sc.nextLine();
+            System.out.print("\n1 - Add a book\n4 - Exit\n");
+            int option = getValidInt("--> Option: ");
 
             switch (option) {
                 case 1:
@@ -47,5 +47,21 @@ public class Main {
         return Arrays.copyOf(library, library.length + 1);
     }
 
-
+    public static int getValidInt(String prompt) {
+        int number = -1;
+        while (number < 0) {
+            System.out.print(prompt);
+            try {
+                number = sc.nextInt();
+                if (number < 0) {
+                    System.out.println("Error: Must be greater than or equal to 0.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid number, not text.");
+            } finally {
+                sc.nextLine();
+            }
+        }
+        return number;
+    }
 }
