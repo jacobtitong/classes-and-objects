@@ -19,5 +19,18 @@ public class Main {
         }
     }
 
-    
+    public static void addBook() {
+        // Gather data
+        System.out.print("Enter title: ");
+        String title = sc.nextLine();
+        System.out.print("Enter author: ");
+        String author = sc.nextLine();
+        System.out.print("Enter year: ");
+        int year = sc.nextInt();
+
+        // Add the book
+        library[numberOfBooks] = new Book(title, author, year);
+    }
+
+
 }
