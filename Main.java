@@ -41,6 +41,7 @@ public class Main {
 
         // Add another slot
         library = addSlot(library);
+        numberOfBooks = library.length - 1;
     }
     
     public static Book[] addSlot(Book[] library) {
