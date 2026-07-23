@@ -11,6 +11,7 @@ public class Main {
         while (!endProgram) {
             switch (option) {
                 case 1:
+                    addBook();
                     break;
                 case 4:
                     endProgram = true;
@@ -30,6 +31,13 @@ public class Main {
 
         // Add the book
         library[numberOfBooks] = new Book(title, author, year);
+
+        // Add another slot
+        library = addSlot(library);
+    }
+    
+    public static Book[] addSlot(Book[] library) {
+        return Arrays.copyOf(library, library.length + 1);
     }
 
 
