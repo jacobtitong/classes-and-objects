@@ -12,12 +12,15 @@ public class Main {
 
         while (!endProgram) {
             System.out.print("\n=== LIBRARY MANAGEMENT SYSTEM MENU ===");
-            System.out.print("\n1 - Add a book\n4 - Exit\n");
+            System.out.print("\n1 - Add a book\n2 - Display books\n4 - Exit\n");
             int option = getValidInt("--> Option: ");
 
             switch (option) {
                 case 1:
                     addBook();
+                    break;
+                case 2:
+                    displayBooks();
                     break;
                 case 4:
                     endProgram = true;
@@ -33,8 +36,7 @@ public class Main {
         String title = sc.nextLine();
         System.out.print("Enter author: ");
         String author = sc.nextLine();
-        System.out.print("Enter year: ");
-        int year = sc.nextInt();
+        int year = getValidYear("Enter year: ");
 
         // Add the book
         library[numberOfBooks] = new Book(title, author, year);
@@ -64,5 +66,36 @@ public class Main {
             }
         }
         return number;
+    }
+
+    public static int getValidYear(String prompt) {
+        boolean isValid = false;
+        int year = -1;
+        while (!isValid) {
+            year = getValidInt(prompt);
+            if (year >= 1000 && year <= 2026) {
+                isValid = true;
+            } else {
+                System.out.println("Error: Please enter a realistic publication year (4 digits, between 1000 - 2026) ");
+            }
+        }
+        return year;
+    }
+
+    public static void displayBooks() {
+        System.out.print("\n=== BOOK LIST ===");
+        System.out.println("\n+----------------------+-----------------+--------+");
+        System.out.printf("| %-20.20s | %-15.15s | %-6s |\n", "Title", "Author", "Year");
+        System.out.println("+----------------------+-----------------+--------+");
+
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (library[i] != null) {
+                System.out.printf("| %-20.20s | %-15.15s | %-6d |\n", 
+                library[i].title, 
+                library[i].author, 
+                library[i].year);
+            }
+        }
+        System.out.println("+----------------------+-----------------+--------+");
     }
 }
