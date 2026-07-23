@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
     static Book[] library = new Book[1];
@@ -9,6 +10,11 @@ public class Main {
         boolean endProgram = false;
 
         while (!endProgram) {
+            System.out.print("\n=== LIBRARY MANAGEMENT SYSTEM MENU ===");
+            System.out.print("\n1 - Add a book\n4 - Exit\n--> Option: ");
+            int option = sc.nextInt();
+            sc.nextLine();
+
             switch (option) {
                 case 1:
                     addBook();
@@ -21,6 +27,7 @@ public class Main {
     }
 
     public static void addBook() {
+        System.out.print("\n=== ADD A BOOK ===\n");
         // Gather data
         System.out.print("Enter title: ");
         String title = sc.nextLine();
