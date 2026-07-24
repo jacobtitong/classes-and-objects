@@ -15,4 +15,9 @@ public class Book {
     public int generateID() {
         return idCounter++;
     }
+
+    public int getID() { return id; }
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public int getYear() { return year; }
 }
