@@ -123,19 +123,19 @@ public class Main {
         System.out.print("\n=== SEARCH FOR A BOOK ===\n");
         String book = getNonEmptyString("Enter a book to search: ");
         boolean found = false;
-        int ctr = 0;
+        int foundIndex = -1;
 
         for (int i = 0; i < numberOfBooks; i++) {
             if (library[i] != null && library[i].title.equalsIgnoreCase(book)) {
                 found = true;
+                foundIndex = i;
                 break;
             }
-            ctr++;
         }
 
         if (found) {
             System.out.print("Book found!\n");
-            System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n", library[ctr].title, library[ctr].author, library[ctr].year);
+            System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n", library[foundIndex].title, library[foundIndex].author, library[foundIndex].year);
 
         } else {
             System.out.print("Book not found!\n");
