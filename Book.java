@@ -1,9 +1,9 @@
 public class Book {
-    public static int idCounter = 0;
-    public int id;
-    public String title;
-    public String author;
-    public int year;
+    private static int idCounter = 0;
+    private int id;
+    private String title;
+    private String author;
+    private int year;
 
     public Book(String title, String author, int year) {
         this.id = generateID();

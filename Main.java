@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class Main {
-    static Book[] library = new Book[1];
-    static int numberOfBooks = library.length - 1;
+    static Book[] library = new Book[0];
+    static int numberOfBooks = 0;
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -28,6 +28,8 @@ public class Main {
                 case 4:
                     endProgram = true;
                     break;
+                default:
+                    System.out.println("Error: Invalid option. Please choose 1-4.");
             }
         }
     }
@@ -40,16 +42,14 @@ public class Main {
         int year = getValidYear("Enter year: ");
 
         if (getValidBook(title, author, year)) {
-            System.out.print("Error: Book already exists in the library. Please try again.\n");
+            System.out.print("Error: Book already exists in the library.\n");
             return;
         }
 
-        // Add the book
-        library[numberOfBooks] = new Book(title, author, year);
-
-        // Add another slot
+        // Add the book to the library
         library = addSlot(library);
-        numberOfBooks = library.length - 1;
+        library[numberOfBooks] = new Book(title, author, year);
+        numberOfBooks++;
 
         System.out.print("Book added successfully!\n");
     }
@@ -59,14 +59,15 @@ public class Main {
     }
 
     public static boolean getValidBook(String title, String author, int year) {
-        boolean bookExists = false;
-        for (int i = 0; i <  numberOfBooks; i++) {
-            bookExists = library[i].title.equalsIgnoreCase(title) && library[i].author.equalsIgnoreCase(author) && library[i].year == year;
-            if (bookExists) {
-                return bookExists;
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (library[i] != null && 
+                library[i].getTitle().equalsIgnoreCase(title) && 
+                library[i].getAuthor().equalsIgnoreCase(author) && 
+                library[i].getYear() == year) {
+                return true;
             }
         }
-        return bookExists;
+        return false;
     }
 
     public static int getValidInt(String prompt) {
@@ -119,51 +120,38 @@ public class Main {
 }
 
     public static void displayBooks() {
-        System.out.print("\n=== BOOK LIST ===");
-        System.out.println("\n+----------------------+-----------------+--------+");
-        System.out.printf("| %-20.20s | %-15.15s | %-6s |\n", "Title", "Author", "Year");
-        System.out.println("+----------------------+-----------------+--------+");
-
+        System.out.println("\n=== BOOK LIST: ===");
+        
+        System.out.printf("%-20s %-16s %-4s\n", "Title", "Author", "Year");
+        
         for (int i = 0; i < numberOfBooks; i++) {
             if (library[i] != null) {
-                System.out.printf("| %-20.20s | %-15.15s | %-6d |\n", 
-                library[i].title, 
-                library[i].author, 
-                library[i].year);
+                System.out.printf("%-20.20s %-16.16s %-4d\n", 
+                    library[i].getTitle(), 
+                    library[i].getAuthor(), 
+                    library[i].getYear());
             }
         }
-        System.out.println("+----------------------+-----------------+--------+");
     }
 
     public static void searchBook() {
         System.out.print("\n=== SEARCH FOR A BOOK ===\n");
         String book = getNonEmptyString("Enter a book to search: ");
-        
         boolean foundAny = false;
 
         for (int i = 0; i < numberOfBooks; i++) {
-            if (library[i] != null && library[i].title.equalsIgnoreCase(book)) {
-                
-                if (!foundAny) {
-                    System.out.print("\nMatches found!\n");
-                    System.out.println("+----------------------+-----------------+--------+");
-                    System.out.printf("| %-20.20s | %-15.15s | %-6s |\n", "Title", "Author", "Year");
-                    System.out.println("+----------------------+-----------------+--------+");
-                    foundAny = true;
-                }
-
-                System.out.printf("| %-20.20s | %-15.15s | %-6d |\n", 
-                    library[i].title, 
-                    library[i].author, 
-                    library[i].year);
+            if (library[i] != null && library[i].getTitle().equalsIgnoreCase(book)) {
+                System.out.print("Book found!\n");
+                System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n\n", 
+                    library[i].getTitle(), 
+                    library[i].getAuthor(), 
+                    library[i].getYear());
+                foundAny = true;
             }
         }
 
-        if (foundAny) {
-            System.out.println("+----------------------+-----------------+--------+");
-        } else {
+        if (!foundAny) {
             System.out.print("Book not found!\n");
         }
     }
-
 }
