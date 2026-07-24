@@ -138,23 +138,32 @@ public class Main {
     public static void searchBook() {
         System.out.print("\n=== SEARCH FOR A BOOK ===\n");
         String book = getNonEmptyString("Enter a book to search: ");
-        boolean found = false;
-        int foundIndex = -1;
+        
+        boolean foundAny = false;
 
         for (int i = 0; i < numberOfBooks; i++) {
             if (library[i] != null && library[i].title.equalsIgnoreCase(book)) {
-                found = true;
-                foundIndex = i;
-                break;
+                
+                if (!foundAny) {
+                    System.out.print("\nMatches found!\n");
+                    System.out.println("+----------------------+-----------------+--------+");
+                    System.out.printf("| %-20.20s | %-15.15s | %-6s |\n", "Title", "Author", "Year");
+                    System.out.println("+----------------------+-----------------+--------+");
+                    foundAny = true;
+                }
+
+                System.out.printf("| %-20.20s | %-15.15s | %-6d |\n", 
+                    library[i].title, 
+                    library[i].author, 
+                    library[i].year);
             }
         }
 
-        if (found) {
-            System.out.print("Book found!\n");
-            System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n", library[foundIndex].title, library[foundIndex].author, library[foundIndex].year);
-
+        if (foundAny) {
+            System.out.println("+----------------------+-----------------+--------+");
         } else {
             System.out.print("Book not found!\n");
         }
     }
+
 }
