@@ -29,6 +29,11 @@ public class Library {
 
     public void displayBooks() {
         System.out.println("\n=== BOOK LIST: ===");
+
+        if (numberOfBooks == 0) {
+            System.out.println("No books in the library.");
+            return;
+        }
         
         System.out.printf("%-20s %-16s %-4s\n", "Title", "Author", "Year");
         
