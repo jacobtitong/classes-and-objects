@@ -26,4 +26,19 @@ public class Library {
         }
         return false;
     }
+
+    public void displayBooks() {
+        System.out.println("\n=== BOOK LIST: ===");
+        
+        System.out.printf("%-20s %-16s %-4s\n", "Title", "Author", "Year");
+        
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (books[i] != null) {
+                System.out.printf("%-20.20s %-16.16s %-4d\n", 
+                    books[i].getTitle(), 
+                    books[i].getAuthor(), 
+                    books[i].getYear());
+            }
+        }
+    }
 }
