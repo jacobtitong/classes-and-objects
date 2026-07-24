@@ -46,23 +46,24 @@ public class Main {
             System.out.print("Error: Book already exists in the library.\n");
         }
     }
-    
-    public static Book[] addSlot(Book[] library) {
-        return Arrays.copyOf(library, library.length + 1);
-    }
 
-    public static boolean getValidBook(String title, String author, int year) {
-        for (int i = 0; i < numberOfBooks; i++) {
-            if (library[i] != null && 
-                library[i].getTitle().equalsIgnoreCase(title) && 
-                library[i].getAuthor().equalsIgnoreCase(author) && 
-                library[i].getYear() == year) {
-                return true;
-            }
+    public static void searchBook() {
+        System.out.print("\n=== SEARCH FOR A BOOK ===\n");
+        String title = getNonEmptyString("Enter a book to search: ");
+        Book[] results = library.searchBook(title);
+
+        if (results.length == 0) {
+            System.out.print("Book not found!\n");
+            return;
         }
-        return false;
-    }
 
+        for (Book b : results) {
+            System.out.print("Book found!\n");
+            System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n\n", b.getTitle(), b.getAuthor(), b.getYear());
+        }
+
+    }
+    
     public static int getValidInt(String prompt) {
         int number = -1;
         while (number < 0) {
@@ -96,55 +97,20 @@ public class Main {
     }
 
     public static String getNonEmptyString(String prompt) {
-    String input = "";
-    boolean isValid = false;
+        String input = "";
+        boolean isValid = false;
 
-    while (!isValid) {
-        System.out.print(prompt);
-        input = sc.nextLine();
+        while (!isValid) {
+            System.out.print(prompt);
+            input = sc.nextLine();
 
-        if (!input.trim().isEmpty()) {
-            isValid = true;
-        } else {
-            System.out.println("Error: Input cannot be empty or just spaces.");
-        }
-    }
-    return input;
-}
-
-    public static void displayBooks() {
-        System.out.println("\n=== BOOK LIST: ===");
-        
-        System.out.printf("%-20s %-16s %-4s\n", "Title", "Author", "Year");
-        
-        for (int i = 0; i < numberOfBooks; i++) {
-            if (library[i] != null) {
-                System.out.printf("%-20.20s %-16.16s %-4d\n", 
-                    library[i].getTitle(), 
-                    library[i].getAuthor(), 
-                    library[i].getYear());
+            if (!input.trim().isEmpty()) {
+                isValid = true;
+            } else {
+                System.out.println("Error: Input cannot be empty or just spaces.");
             }
         }
+        return input;
     }
 
-    public static void searchBook() {
-        System.out.print("\n=== SEARCH FOR A BOOK ===\n");
-        String book = getNonEmptyString("Enter a book to search: ");
-        boolean foundAny = false;
-
-        for (int i = 0; i < numberOfBooks; i++) {
-            if (library[i] != null && library[i].getTitle().equalsIgnoreCase(book)) {
-                System.out.print("Book found!\n");
-                System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n\n", 
-                    library[i].getTitle(), 
-                    library[i].getAuthor(), 
-                    library[i].getYear());
-                foundAny = true;
-            }
-        }
-
-        if (!foundAny) {
-            System.out.print("Book not found!\n");
-        }
-    }
 }
