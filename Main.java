@@ -12,7 +12,7 @@ public class Main {
 
         while (!endProgram) {
             System.out.print("\n=== LIBRARY MANAGEMENT SYSTEM MENU ===");
-            System.out.print("\n1 - Add a book\n2 - Display books\n4 - Exit\n");
+            System.out.print("\n1 - Add a book\n2 - Display books\n3 - Search for a book\n4 - Exit\n");
             int option = getValidInt("--> Option: ");
 
             switch (option) {
@@ -21,6 +21,9 @@ public class Main {
                     break;
                 case 2:
                     displayBooks();
+                    break;
+                case 3:
+                    searchBook();
                     break;
                 case 4:
                     endProgram = true;
@@ -97,5 +100,29 @@ public class Main {
             }
         }
         System.out.println("+----------------------+-----------------+--------+");
+    }
+
+    public static void searchBook() {
+        System.out.print("\n=== SEARCH FOR A BOOK ===\n");
+        System.out.print("Enter a book to search: ");
+        String book = sc.nextLine();
+        boolean found = false;
+        int ctr = 0;
+
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (library[i] != null && library[i].title.equalsIgnoreCase(book)) {
+                found = true;
+                break;
+            }
+            ctr++;
+        }
+
+        if (found) {
+            System.out.print("Book found!\n");
+            System.out.printf("Title: %s\nAuthor: %s\nYear: %d\n", library[ctr].title, library[ctr].author, library[ctr].year);
+
+        } else {
+            System.out.print("Book not found!\n");
+        }
     }
 }
