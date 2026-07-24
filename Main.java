@@ -35,10 +35,8 @@ public class Main {
     public static void addBook() {
         System.out.print("\n=== ADD A BOOK ===\n");
         // Gather data
-        System.out.print("Enter title: ");
-        String title = sc.nextLine();
-        System.out.print("Enter author: ");
-        String author = sc.nextLine();
+        String title = getNonEmptyString("Enter title: ");
+        String author = getNonEmptyString("Enter author: ");
         int year = getValidYear("Enter year: ");
 
         // Add the book
@@ -47,7 +45,7 @@ public class Main {
         // Add another slot
         library = addSlot(library);
         numberOfBooks = library.length - 1;
-        
+
         System.out.print("Book added successfully!\n");
     }
     
@@ -87,6 +85,23 @@ public class Main {
         return year;
     }
 
+    public static String getNonEmptyString(String prompt) {
+    String input = "";
+    boolean isValid = false;
+
+    while (!isValid) {
+        System.out.print(prompt);
+        input = sc.nextLine();
+
+        if (!input.trim().isEmpty()) {
+            isValid = true;
+        } else {
+            System.out.println("Error: Input cannot be empty or just spaces.");
+        }
+    }
+    return input;
+}
+
     public static void displayBooks() {
         System.out.print("\n=== BOOK LIST ===");
         System.out.println("\n+----------------------+-----------------+--------+");
@@ -106,8 +121,7 @@ public class Main {
 
     public static void searchBook() {
         System.out.print("\n=== SEARCH FOR A BOOK ===\n");
-        System.out.print("Enter a book to search: ");
-        String book = sc.nextLine();
+        String book = getNonEmptyString("Enter a book to search: ");
         boolean found = false;
         int ctr = 0;
 
