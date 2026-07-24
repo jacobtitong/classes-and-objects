@@ -98,4 +98,23 @@ public class Main {
         }
         System.out.println("+----------------------+-----------------+--------+");
     }
+
+    public static void searchBook() {
+        System.out.print("\n=== SEARCH FOR A BOOK ===\n");
+        System.out.print("Enter a book to search: ");
+        String book = sc.nextLine();
+        boolean found = false;
+
+        for (int i = 0; i < numberOfBooks; i++) {
+
+        }
+
+        if (found) {
+            System.out.print("Book found!\n");
+            System.out.printf("");
+
+        } else {
+            System.out.print("Book not found!\n");
+        }
+    }
 }
