@@ -41,4 +41,15 @@ public class Library {
             }
         }
     }
+
+    public Book[] searchBook(String title) {
+        Book[] results = new Book[0];
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (books[i] != null && books[i].getTitle().equalsIgnoreCase(title)) {
+                results = Arrays.copyOf(results, results.length + 1);
+                results[results.length - 1] = books[i];
+            }
+        }
+        return results;
+    }
 }
