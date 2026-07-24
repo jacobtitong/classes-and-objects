@@ -41,7 +41,7 @@ public class Main {
 
         boolean added = library.addBook(title, author, year);
         if (added) {
-            System.out.print("Book added successfully\n");
+            System.out.print("Book added successfully!\n");
         } else {
             System.out.print("Error: Book already exists in the library.\n");
         }
