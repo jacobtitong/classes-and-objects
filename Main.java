@@ -1,10 +1,8 @@
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class Main {
-    static Book[] library = new Book[0];
-    static int numberOfBooks = 0;
+    static Library library = new Library();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -20,7 +18,7 @@ public class Main {
                     addBook();
                     break;
                 case 2:
-                    displayBooks();
+                    library.displayBooks();
                     break;
                 case 3:
                     searchBook();
@@ -41,17 +39,12 @@ public class Main {
         String author = getNonEmptyString("Enter author: ");
         int year = getValidYear("Enter year: ");
 
-        if (getValidBook(title, author, year)) {
+        boolean added = library.addBook(title, author, year);
+        if (added) {
+            System.out.print("Book added successfully\n");
+        } else {
             System.out.print("Error: Book already exists in the library.\n");
-            return;
         }
-
-        // Add the book to the library
-        library = addSlot(library);
-        library[numberOfBooks] = new Book(title, author, year);
-        numberOfBooks++;
-
-        System.out.print("Book added successfully!\n");
     }
     
     public static Book[] addSlot(Book[] library) {
