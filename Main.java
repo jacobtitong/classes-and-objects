@@ -39,6 +39,11 @@ public class Main {
         String author = getNonEmptyString("Enter author: ");
         int year = getValidYear("Enter year: ");
 
+        if (getValidBook(title, author, year)) {
+            System.out.print("Error: Book already exists in the library. Please try again.\n");
+            return;
+        }
+
         // Add the book
         library[numberOfBooks] = new Book(title, author, year);
 
@@ -51,6 +56,17 @@ public class Main {
     
     public static Book[] addSlot(Book[] library) {
         return Arrays.copyOf(library, library.length + 1);
+    }
+
+    public static boolean getValidBook(String title, String author, int year) {
+        boolean bookExists = false;
+        for (int i = 0; i <  numberOfBooks; i++) {
+            bookExists = library[i].title.equalsIgnoreCase(title) && library[i].author.equalsIgnoreCase(author) && library[i].year == year;
+            if (bookExists) {
+                return bookExists;
+            }
+        }
+        return bookExists;
     }
 
     public static int getValidInt(String prompt) {
