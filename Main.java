@@ -47,6 +47,8 @@ public class Main {
         // Add another slot
         library = addSlot(library);
         numberOfBooks = library.length - 1;
+        
+        System.out.print("Book added successfully!\n");
     }
     
     public static Book[] addSlot(Book[] library) {
